@@ -6,30 +6,27 @@ class FiguresController < ApplicationController
   end
 
   get '/figures/new' do
+    @titles = Title.all
+    @landmarks = Landmark.all
     erb :'/figures/new'
   end
 
   post '/figures' do
-    @title = Title.first_or_create(params["figure"])
-    @lanmark = Landmark.first_or_create(params["figure"])
-    @figure = Figure.first_or_create(params["figure"])
-    @figure.landmarks << @landmark
-    @figure.titles << @title
+    @figure = Figure.create(params["figure"])
+    # binding.pry
+    if params["title"]["name"]
+      @title = title.create(params["title"])
+      @figure.titles << @title
+    end
+    # @figure.landmarks << @landmark
     # redirect "/figures/#{@figure.id}"
     erb :'/figures/show'
   end
 
-  # @title = Title.first_or_create(params["figure"]["title"])
-  # @lanmark = Landmark.first_or_create(params["figure"]["landmark"])
-  # @figure = Figure.create(params["figure"]["name"])
-  # @figure.landmarks << @landmark
-  # @figure.titles << @title
-  #
-
-  # get '/figures/:id' do
-  #   @figure = Figure.find(params[:id])
-  #   erb :'/figures/show'
-  # end
+  get '/figures/:id' do
+    @figure = Figure.find(params[:id])
+    erb :'/figures/show'
+  end
 
 
 end
