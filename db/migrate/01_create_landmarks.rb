@@ -5,4 +5,5 @@ class CreateLandmarks < ActiveRecord::Migration
       t.string :year_completed
       t.references :figure
     end
+  end
 end
