@@ -4,5 +4,5 @@ class CreateTitlesFigures < ActiveRecord::Migration
       t.references :figure
       t.references :title
     end
-
   end
+end
